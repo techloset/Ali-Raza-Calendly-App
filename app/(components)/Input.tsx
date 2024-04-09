@@ -24,7 +24,7 @@ const InputField: React.FC<InputProps> = ({
         name={name}
         onChange={onChange}
         value={value}
-        className="shadow-xl h-12 border rounded w-full py-2 px-3 text-gray-700 outline-none"
+        className="focus:shadow-2xl shadow-lg h-12 border rounded w-full py-2 px-3 text-gray-700 outline-none"
       />
     </div>
   );
