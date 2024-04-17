@@ -105,56 +105,56 @@
 import Button from "@/app/(components)/Button";
 import InputField from "@/app/(components)/Input";
 import axios from "axios";
-import { signIn } from "next-auth/react";
+import { signIn, signOut } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import React, { FormEvent, useState } from "react";
+import React, { FormEvent, useEffect, useState } from "react";
 import SignupLogo from "../../(asset)/images/auth_images/logo-calendly.svg";
 import Openeye from "../../(asset)/images/auth_images/Open-eye.png";
 import Closeeye from "../../(asset)/images/auth_images/Closed-eye.png";
 import toast from "react-hot-toast";
 
 export default function Signup() {
-  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [username, setUsername] = useState("");
   const [error, setError] = useState("");
   const [isPasswordVisible, setPasswordVisible] = useState(false);
   const router = useRouter();
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault();
+
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async () => {
+    setLoading(true);
 
     try {
-      const res = await axios.post("api/register", {
-        email,
-        password,
-      });
-      await signIn("credentials", {
-        email,
-        password,
+      const login = await signIn("credentials", {
+        email: email,
+        password: password,
         redirect: false,
       });
-      toast.success("User created successfully");
+      toast.success("Successfully login");
       router.push("/");
-      // const res = await fetch("api/register", {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      //   body: JSON.stringify({
-      //     name,
-      //     email,
-      //     password,
-      //   }),
-      // });
-      console.log(res);
     } catch (error: any) {
-      // console.log("error", error);
-      toast.error(error?.response?.data);
+      toast.error(error.message);
     }
+
+    setLoading(false);
   };
+  // const handleSubmit = async () => {
+  //   try {
+  //     await signIn("credentials", {
+  //       email: email,
+  //       password: password,
+  //       redirect: false
+  //     });
+  //     toast.success("User created successfully");
+  //     // router.push("/");
+  //   } catch (error: any) {
+  //     // console.log("error", error);
+  //     toast.error(error?.response?.data);
+  //   }
+  // };
   // const submitfrom = async (e: any) => {
   //   e.preventDefault();
   //   try {
@@ -267,12 +267,7 @@ export default function Signup() {
             </div>
           )}
           <div className="flex items-center justify-center mt-4">
-            <Button
-              name="Sign In "
-              onClick={() => {
-                handleSubmit;
-              }}
-            />
+            <Button name="Sign In " onClick={handleSubmit} />
           </div>
           <div className="flex items-center justify-center mt-4 text-sm text-center">
             Don't have an account?&ensp;

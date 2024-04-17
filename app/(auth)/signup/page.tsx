@@ -1,14 +1,12 @@
 "use client";
 import Button from "@/app/(components)/Button";
 import InputField from "@/app/(components)/Input";
-import Input from "@/app/(components)/Input";
 import axios from "axios";
-import { AnyARecord } from "dns";
 import { signIn } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import React, { FormEvent, useState } from "react";
+import React, { useState } from "react";
 import SignupLogo from "../../(asset)/images/auth_images/logo-calendly.svg";
 import Openeye from "../../(asset)/images/auth_images/Open-eye.png";
 import Closeeye from "../../(asset)/images/auth_images/Closed-eye.png";
@@ -23,57 +21,27 @@ export default function Signup() {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
   const router = useRouter();
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault();
-
+  const handleSubmit = async () => {
+    // e.preventDefault();
+    console.log("name", name);
+    console.log("username", username);
+    console.log("email", email);
+    console.log("password", password);
     try {
       const res = await axios.post("api/register", {
+        name,
+        username,
         email,
         password,
       });
-      await signIn("credentials", {
-        email,
-        password,
-        redirect: false,
-      });
-      toast.success("User created successfully");
-      router.push("/");
-      // const res = await fetch("api/register", {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      //   body: JSON.stringify({
-      //     name,
-      //     email,
-      //     password,
-      //   }),
-      // });
-      console.log(res);
+
+      toast.success("User created successfully...");
+      router.push("/signin");
     } catch (error: any) {
-      // console.log("error", error);
+      console.log("error", error);
       toast.error(error?.response?.data);
     }
   };
-  // const submitfrom = async (e: any) => {
-  //   e.preventDefault();
-  //   try {
-  //     const res = await fetch("api/register", {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify({
-  //         name,
-  //         email,
-  //         password,
-  //       }),
-  //     });
-  //     console.log(res);
-  //   } catch (error) {
-  //     console.log("error", error);
-  //   }
-  // };
 
   const togglePasswordVisibility = () => {
     setIsPasswordVisible(!isPasswordVisible);
@@ -81,7 +49,7 @@ export default function Signup() {
 
   return (
     <>
-      <div className="bg-white mt-5">
+      <div className="bg-white ">
         <div className=" text-md flex justify-center items-center">
           <Image
             src={SignupLogo}
@@ -100,7 +68,7 @@ export default function Signup() {
           <form className="bg-white shadow-black shadow-md rounded-lg px-8 pb-4 mb-3 w-[440px] ">
             <div className=" pt-6">
               <label
-                className="block text-gray-700  font-bold mb-2"
+                className="block text-gray-700  font-bold mb-1"
                 htmlFor="email"
               >
                 Enter your email to get started
@@ -119,7 +87,7 @@ export default function Signup() {
             </div>
             <div className="mb-4 mt-3">
               <label
-                className="block text-gray-700 font-bold mb-2"
+                className="block text-gray-700 font-bold mb-1"
                 htmlFor="email"
               >
                 Enter your full name
@@ -137,7 +105,7 @@ export default function Signup() {
             </div>
             <div className="mb-4">
               <label
-                className="block text-gray-700 font-bold mb-2"
+                className="block text-gray-700 font-bold mb-1"
                 htmlFor="username"
               >
                 Enter your username
@@ -153,9 +121,9 @@ export default function Signup() {
                 }}
               />
             </div>
-            <div className="mb-4">
+            <div className="">
               <label
-                className="block text-gray-700 font-bold mb-2"
+                className="block text-gray-700 font-bold mb-1"
                 htmlFor="password"
               >
                 Choose a password with at least 8 characters
@@ -182,7 +150,7 @@ export default function Signup() {
               </div>
             </div>
 
-            <div className="mb-4 ">
+            <div className=" ">
               <div className="text-red-500 mx-5 text-sm">
                 Use a few words, avoid common phrases <br />
                 No need for symbols, digits, or uppercase letters
@@ -201,7 +169,7 @@ export default function Signup() {
               </div>
             )}
             <div className="flex items-center justify-center mt-4">
-              <Button name="Sign Up " onClick={() => {}} />
+              <Button name="Sign Up " onClick={handleSubmit} />
             </div>
             <div className="flex items-center justify-center mt-4 text-sm text-center">
               Already have an account?&ensp;

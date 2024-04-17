@@ -6,5 +6,16 @@ const handleSignout = () => {
   alert("Signed out");
 };
 export default function Test() {
-  return <button onClick={handleSignout}>Sign out</button>;
+  return (
+    <>
+      <h1>Test</h1>
+      <button
+        type="button"
+        className="h-[44px] w-auto bg-[#0069FF] hover:bg-[#0069FF] text-white font-bold py-2 px-4 rounded-3xl"
+        onClick={handleSignout}
+      >
+        Sign out
+      </button>
+    </>
+  );
 }
