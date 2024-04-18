@@ -8,6 +8,11 @@ import { prisma } from "@/app/libs/prismadb";
 export const authOptions: AuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
   providers: [
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID!,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+    }),
+
     CredentialsProvider({
       name: "credentials",
       credentials: {},
@@ -18,22 +23,24 @@ export const authOptions: AuthOptions = {
           return null;
         }
 
-        const user = await prisma.user.findFirst({
+        const user = await prisma.user.findUnique({
           where: {
             email: credentials.email,
           },
         });
 
         if (!user) {
+          console.log("user not found.....");
           return null;
         }
 
-        const passwordMatch = bcrypt.compare(
+        const passwordMatch = await bcrypt.compare(
           credentials.password,
-          user.password || ""
+          user.password
         );
 
         if (!passwordMatch) {
+          console.log("invalidPassword");
           return null;
         }
 
@@ -41,7 +48,6 @@ export const authOptions: AuthOptions = {
       },
     }),
   ],
-
   callbacks: {
     async signIn({ account, profile }: any) {
       if (account?.provider === "google") {
@@ -56,6 +62,8 @@ export const authOptions: AuthOptions = {
               data: {
                 name: profile?.name,
                 email: profile?.email,
+                username: profile?.email,
+                password: "", // Google sign-in doesn't provide password
               },
             });
             console.log("User created:", newUser);
@@ -67,7 +75,6 @@ export const authOptions: AuthOptions = {
       return true;
     },
   },
-
   session: {
     strategy: "jwt",
   },
@@ -77,4 +84,4 @@ export const authOptions: AuthOptions = {
 };
 
 const handler = NextAuth(authOptions);
-export { handler as GET, handler as POST };
+export default handler;

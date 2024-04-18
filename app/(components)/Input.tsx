@@ -6,7 +6,6 @@ interface InputProps {
   name: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   value: string;
-
   id: string;
 }
 const InputField: React.FC<InputProps> = ({

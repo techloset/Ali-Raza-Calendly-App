@@ -35,42 +35,12 @@ export default function Signup() {
       });
       toast.success("User created successfully");
       router.push("/");
-      // const res = await fetch("api/register", {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      //   body: JSON.stringify({
-      //     name,
-      //     email,
-      //     password,
-      //   }),
-      // });
+
       console.log(res);
     } catch (error: any) {
-      // console.log("error", error);
       toast.error(error?.response?.data);
     }
   };
-  // const submitfrom = async (e: any) => {
-  //   e.preventDefault();
-  //   try {
-  //     const res = await fetch("api/register", {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify({
-  //         name,
-  //         email,
-  //         password,
-  //       }),
-  //     });
-  //     console.log(res);
-  //   } catch (error) {
-  //     console.log("error", error);
-  //   }
-  // };
 
   const togglePasswordVisibility = () => {
     setPasswordVisible(!isPasswordVisible);

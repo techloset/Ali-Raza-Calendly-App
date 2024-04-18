@@ -22,17 +22,17 @@
 // }
 
 // export default function AuthProvider({ children }: AuthProviderProps) {
-"use client";
+// "use client";
 
-import { SessionProvider } from "next-auth/react";
-import React from "react";
+// import { SessionProvider } from "next-auth/react";
+// import React from "react";
 
-interface AuthProviderProps {
-  children: React.ReactNode;
+// interface AuthProviderProps {
+//   children: React.ReactNode;
 
-  SessionProvider: typeof SessionProvider;
-}
+//   SessionProvider: typeof SessionProvider;
+// }
 
-export default function AuthProvider({ children }: AuthProviderProps) {
-  return <SessionProvider>{children}</SessionProvider>;
-}
+// export default function AuthProvider({ children }: AuthProviderProps) {
+//   return <SessionProvider>{children}</SessionProvider>;
+// }

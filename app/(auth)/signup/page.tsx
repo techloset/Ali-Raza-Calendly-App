@@ -22,13 +22,13 @@ export default function Signup() {
 
   const router = useRouter();
   const handleSubmit = async () => {
-    // e.preventDefault();
-    console.log("name", name);
-    console.log("username", username);
-    console.log("email", email);
-    console.log("password", password);
+    if (!name || !username || !email || !password) {
+      toast.error("Please fill in all required fields.");
+      return;
+    }
+
     try {
-      const res = await axios.post("api/register", {
+      const res = await axios.post("/api/register", {
         name,
         username,
         email,
@@ -39,7 +39,7 @@ export default function Signup() {
       router.push("/signin");
     } catch (error: any) {
       console.log("error", error);
-      toast.error(error?.response?.data);
+      toast.error(error?.response?.data || "Something went wrong.");
     }
   };
 
@@ -73,7 +73,6 @@ export default function Signup() {
               >
                 Enter your email to get started
               </label>
-
               <InputField
                 name="email"
                 value={email}

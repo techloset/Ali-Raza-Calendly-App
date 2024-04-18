@@ -1,121 +1,17 @@
-// "use client";
-// import Button from "@/app/(components)/Button";
-// import axios from "axios";
-// import { signIn } from "next-auth/react";
-// import Link from "next/link";
-// import router from "next/router";
-// import { useState } from "react";
-// // import toast from "react-hot-toast";
-
-// export default function Signin() {
-//   const [email, setEmail] = useState("");
-//   const [password, setPassword] = useState("");
-//   const [loading, setLoading] = useState(false);
-
-//   const handleSubmit = async (e: any) => {
-//     // e.preventDefault();
-//     // setLoading(true);
-//     // try {
-//     //   await signIn("credentials", {
-//     //     email,
-//     //     password,
-//     //     redirect: false,
-//     //   });
-//     //   toast.success("User login successfully");
-//     //   const res = await fetch("api/register", {
-//     //     method: "POST",
-//     //     headers: {
-//     //       "Content-Type": "application/json",
-//     //     },
-//     //     body: JSON.stringify({
-//     //       name,
-//     //       email,
-//     //       password,
-//     //     }),
-//     //   });
-//     //   console.log(res);
-//     // } catch (error: any) {
-//     //   console.log("error", error);
-//     //   toast.error(error?.response?.data);
-//     // } finally {
-//     //   setLoading(false);
-//     // }
-//   };
-//   return (
-//     <div className="bg-white">
-//       <div className="text-white-500 text-md flex justify-center items-center gap-10 font-bold p-10 ">
-//         <Link href="/" className="hover:underline shadow-2xl">
-//           Login
-//         </Link>
-//       </div>
-//       <div className="  flex justify-center">
-//         <div className="bg-white shadow-2xl rounded px-8 pb-8 mb-4 w-[600px]">
-//           <div className="mb-4 mt-10">
-//             <label
-//               className="block text-gray-700 text-sm  mb-2"
-//               htmlFor="email"
-//             >
-//               Email Address
-//             </label>
-//             <input
-//               className="shadow-xl  border rounded w-full py-2 px-3 text-gray-700 "
-//               id="email"
-//               type="text"
-//               placeholder="Enter your email"
-//             />
-//           </div>
-//           <div className="mb-6">
-//             <label
-//               className="block text-gray-700 text-sm  mb-2"
-//               htmlFor="password"
-//             >
-//               Password
-//             </label>
-//             <input
-//               className="shadow-xl  border rounded w-full py-2 px-3 text-gray-700 "
-//               id="password"
-//               type="password"
-//               placeholder="Enter your password"
-//             />
-//           </div>
-//           <div className="mb-6 bg-red-400 rounded-xl w-[180px] h-10 flex justify-center items-center">
-//             Error message
-//           </div>
-//           <div className="flex items-center justify-between">
-//             <button
-//               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg"
-//               type="button"
-//             >
-//               Sign In
-//             </button>
-
-//             <Link href="/signup">
-//               <Button name="Sign Up" onClick={() => {}} />
-//             </Link>
-//           </div>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// }
-
-//====================================
-
 "use client";
 import Button from "@/app/(components)/Button";
 import InputField from "@/app/(components)/Input";
-import axios from "axios";
 import { signIn, signOut } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import React, { FormEvent, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import SignupLogo from "../../(asset)/images/auth_images/logo-calendly.svg";
 import Openeye from "../../(asset)/images/auth_images/Open-eye.png";
 import Closeeye from "../../(asset)/images/auth_images/Closed-eye.png";
 import toast from "react-hot-toast";
 
-export default function Signup() {
+export default function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -133,47 +29,19 @@ export default function Signup() {
         password: password,
         redirect: false,
       });
-      toast.success("Successfully login");
-      router.push("/");
+
+      if (login?.error) {
+        setError(login.error);
+      } else {
+        toast.success("Successfully logged in");
+        router.push("/");
+      }
     } catch (error: any) {
       toast.error(error.message);
     }
 
     setLoading(false);
   };
-  // const handleSubmit = async () => {
-  //   try {
-  //     await signIn("credentials", {
-  //       email: email,
-  //       password: password,
-  //       redirect: false
-  //     });
-  //     toast.success("User created successfully");
-  //     // router.push("/");
-  //   } catch (error: any) {
-  //     // console.log("error", error);
-  //     toast.error(error?.response?.data);
-  //   }
-  // };
-  // const submitfrom = async (e: any) => {
-  //   e.preventDefault();
-  //   try {
-  //     const res = await fetch("api/register", {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify({
-  //         name,
-  //         email,
-  //         password,
-  //       }),
-  //     });
-  //     console.log(res);
-  //   } catch (error) {
-  //     console.log("error", error);
-  //   }
-  // };
 
   const togglePasswordVisibility = () => {
     setPasswordVisible(!isPasswordVisible);
@@ -277,6 +145,13 @@ export default function Signup() {
             >
               Sign Up
             </Link>
+          </div>
+          <div className="flex items-center justify-center mt-4 text-sm text-center">
+            SignUp with Google?&ensp;
+            <Button
+              name="SignIn with Goole "
+              onClick={() => signIn("google", { callbackUrl: "/" })}
+            />
           </div>
         </form>
       </div>
