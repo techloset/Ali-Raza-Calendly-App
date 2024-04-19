@@ -63,7 +63,7 @@ export const authOptions: AuthOptions = {
                 name: profile?.name,
                 email: profile?.email,
                 username: profile?.email,
-                password: "", // Google sign-in doesn't provide password
+                password: "",
               },
             });
             console.log("User created:", newUser);
