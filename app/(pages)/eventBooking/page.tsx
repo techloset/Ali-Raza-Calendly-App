@@ -13,7 +13,6 @@ export default function ScheduleMeeting() {
   const [value, onChange] = useState<Value>(new Date());
   const [timezone, setTimezone] = useState("");
   const [currentTime, setCurrentTime] = useState("");
-  const [showSecondDiv, setShowSecondDiv] = useState([false, false]);
   const [selectedDate, setSelectedDate] = useState(new Date());
 
   const handleDateChange = (value: any) => {
@@ -68,10 +67,23 @@ export default function ScheduleMeeting() {
     { country: "Iran", timezone: "Asia/Tehran" },
     { country: "UAE", timezone: "Asia/Dubai" },
   ];
+  const timeSlots: { start: string; end: string }[] = [
+    { start: "00:30", end: "01:00" },
+    { start: "01:00", end: "01:30" },
+    { start: "01:30", end: "02:00" },
+    { start: "02:00", end: "02:30" },
+    { start: "02:30", end: "03:00" },
+    { start: "03:00", end: "03:30" },
+    { start: "03:30", end: "04:00" },
+  ];
+  const [isVisible, setIsVisible] = useState<boolean[]>(
+    Array(timeSlots.length).fill(true)
+  );
+  // State to track visibility
 
-  const handleFirstDivClick = (index: any) => {
-    setShowSecondDiv((prev) =>
-      prev.map((value, i) => (i === index ? !value : false))
+  const handleToggle = (index: number) => {
+    setIsVisible((prev) =>
+      prev.map((value: any, i: number) => (i === index ? !value : true))
     );
   };
 
@@ -79,8 +91,8 @@ export default function ScheduleMeeting() {
     <>
       <div className="flex justify-center items-center h-screen">
         <div>
-          <div className="w-[1060px] h-[673px] flex bg-slate-400 ">
-            <div className="w-[370px] h-[673px] bg-blue-500 border-2 border-red-500 p-8">
+          <div className="w-[1060px] h-[673px] flex shadow-2xl">
+            <div className="w-[370px] h-[673px]  border-r-2 border-gray-200 p-8">
               <div className="font-bold my-2 text-gray-500">
                 Muhammad Ali Raza
               </div>
@@ -92,7 +104,7 @@ export default function ScheduleMeeting() {
                 </div>
               </div>
             </div>
-            <div className="w-[413px] h-[673px] bg-red-500 border-2 border-yellow-500">
+            <div className="w-[413px] h-[673px] ">
               <div className="font-bold text-[18px] relative top-5 left-5">
                 Select a Date and Time
               </div>
@@ -144,7 +156,7 @@ export default function ScheduleMeeting() {
 
             {/* 3rd section starts here */}
 
-            <div className="w-[277px] h-[673px] bg-white border-2 border-black">
+            <div className="w-[277px] h-[673px] bg-white ">
               <div className="flex justify-end items-center relative top-[-6px] left-[7px]">
                 <Image
                   src={cornerimage}
@@ -156,30 +168,37 @@ export default function ScheduleMeeting() {
                 <div className="relative top-5">{formatDate(selectedDate)}</div>
               </div>
 
-              {/* <div className="flex justify-center gap-2 mt-10 flex-col overflow-auto">
-                
-                {[0, 1].map((index) => (
+              <div className="w-56 flex flex-col gap-2">
+                {timeSlots.map((timeSlot, index) => (
                   <div key={index}>
                     <div
-                      className="flex justify-center border-2 border-blue-500 p-5 text-blue-600 mx-2 rounded-lg cursor-pointer"
-                      onClick={() => handleFirstDivClick(index)}
+                      className={`flex justify-between items-center ${
+                        isVisible[index] ? "" : "hidden"
+                      }`}
+                      onClick={() => handleToggle(index)}
                     >
-                      9:00
+                      <button className="w-full flex justify-center border-2 border-blue-500 p-5 text-blue-600 mx-2 rounded-lg cursor-pointer">
+                        {timeSlot.start}
+                      </button>
                     </div>
-                   
-                    {showSecondDiv[index] && (
-                      <div className="flex justify-center border-2 p-5 bg-green-200 mx-2 rounded-lg relative bottom-[67px]">
-                        <div className="bg-red-500 absolute top-[10px]">
-                          hello1
-                        </div>
-                        <div className="bg-yellow-500 absolute top-[10px]">
-                          hello2
-                        </div>
-                      </div>
-                    )}
+                    <div
+                      className={`flex justify-between items-center gap-2 mx-2 ${
+                        isVisible[index] ? "hidden" : ""
+                      }`}
+                    >
+                      <button className="w-1/2 flex justify-center border-2 border-transparent p-5 text-white bg-gray-600 rounded-lg cursor-pointer">
+                        {timeSlot.start}
+                      </button>
+                      <button
+                        className="w-1/2 flex justify-center border-2 border-transparent p-5 rounded-lg cursor-pointer bg-blue-500 text-white"
+                        onClick={() => handleToggle(index)}
+                      >
+                        Next
+                      </button>
+                    </div>
                   </div>
                 ))}
-              </div> */}
+              </div>
 
               {/* write code upper from this div */}
             </div>

@@ -13,12 +13,14 @@ export default function Home() {
     <div>
       Home
       <Test />
-      <button onClick={() => signOut()}>Logout</button>
       <button className="bg-red-500 text-white m-10">
         <Link href="/availibility">Availibility</Link>
       </button>
       <button className="bg-green-500 text-white m-10">
-        <Link href="/scheduleMeeting">scheduleMeeting</Link>
+        <Link href="/eventBooking">eventBooking</Link>
+      </button>
+      <button className="bg-green-500 text-white m-10">
+        <Link href="/scheduleEvent">scheduleEvent </Link>
       </button>
     </div>
   );
