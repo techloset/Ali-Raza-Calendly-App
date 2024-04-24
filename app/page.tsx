@@ -22,6 +22,12 @@ export default function Home() {
       <button className="bg-green-500 text-white m-10">
         <Link href="/scheduleEvent">scheduleEvent </Link>
       </button>
+      <button className="bg-green-500 text-white m-10">
+        <Link href="/scheduled">scheduled </Link>
+      </button>
+      <button className="bg-green-500 text-white m-10">
+        <Link href="/dash">Dashboard </Link>
+      </button>
     </div>
   );
 }

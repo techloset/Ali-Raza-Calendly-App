@@ -17,7 +17,8 @@ export default function scheduleEvent() {
         <div>
           <div className="w-[1060px] h-[673px] flex shadow-2xl">
             {/* 1st section starts here */}
-            {/* <div className="w-[370px] h-[673px]  border-2 border-gray-200 p-8">
+
+            <div className="w-[370px] h-[673px]  border-r-2 border-gray-200 p-8 relative">
               <div className="font-bold my-2 text-gray-500">
                 Muhammad Ali Raza
               </div>
@@ -40,39 +41,8 @@ export default function scheduleEvent() {
                   Pakistan Maldives Time
                 </div>
               </div>
-              <div className=" flex justify-between items-end mt-82 border-2">
-                <div className="text-sm w-full text-blue-600">
-                  Cookie settings
-                </div>
-                <div className="text-sm w-full flex justify-end">
-                  Report abuse
-                </div>
-              </div>
-            </div> */}
-            <div className="w-[370px] h-[673px]  border-2 border-gray-200 p-8">
-              <div className="font-bold my-2 text-gray-500">
-                Muhammad Ali Raza
-              </div>
-              <div className="font-bold text-2xl">30 Minute Meeting </div>
-              <div className="flex gap-2 items-center mt-5">
-                <div className="flex  items-center gap-2 text-gray-500">
-                  <FaRegClock />
-                  30 min
-                </div>
-              </div>
-              <div className="flex gap-2 items-center mt-5">
-                <div className="flex  items-center gap-2 text-gray-500">
-                  <MdEvent className="w-6 h-6" />
-                  11:00am-11:30am, Wednesday, March 27, 2024
-                </div>
-              </div>
-              <div className="flex gap-2 items-center mt-5">
-                <div className="flex gap-2 items-center text-gray-500">
-                  <GiWorld />
-                  Pakistan Maldives Time
-                </div>
-              </div>
-              <div className="flex justify-between items-end ">
+
+              <div className="flex gap-24 absolute bottom-6">
                 <div className="text-sm  text-blue-600">Cookie settings</div>
                 <div className="text-sm  ">Report abuse</div>
               </div>
