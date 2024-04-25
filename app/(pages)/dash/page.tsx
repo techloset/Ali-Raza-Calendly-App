@@ -10,11 +10,14 @@ import { LuClock3 } from "react-icons/lu";
 import { RiVipCrown2Line } from "react-icons/ri";
 import SidebarBtn from "@/app/(components)/SidebarBtn";
 import { TbBrandGoogleAnalytics } from "react-icons/tb";
+import DashHOme from "../dashHome/page";
+import { TbLogout2 } from "react-icons/tb";
+import { MdSupervisorAccount } from "react-icons/md";
 
 const Dash = ({ children }: any) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [currentPage, setCurrentPage] = useState("home");
-  const [selectedDiv, setSelectedDiv] = useState("home");
+  const [currentPage, setCurrentPage] = useState("DashHomePage");
+  const [selectedDiv, setSelectedDiv] = useState("DashHomePage");
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
   };
@@ -25,8 +28,8 @@ const Dash = ({ children }: any) => {
   };
   const renderPage = () => {
     switch (currentPage) {
-      case "home":
-        return <div>Home</div>;
+      case "DashHomePage":
+        return <DashHOme />;
       case "page1":
         return <div>page1</div>;
       case "page2":
@@ -49,7 +52,7 @@ const Dash = ({ children }: any) => {
             sidebarOpen ? "translate-x-0" : "-translate-x-full"
           } transition-transform duration-500 ease-in-out overflow-y-auto md:translate-x-0 md:static md:bg-transparent md:text-black`}
         >
-          <div className="p-2 border-2 h-full border-gray-700">
+          <div className="p-2 border-2 h-full ">
             <div className="text-2xl font-bold">
               <div className="flex justify-between items-center h-16">
                 <a href="/dash">
@@ -72,9 +75,9 @@ const Dash = ({ children }: any) => {
                   icon={<GrSchedulePlay className="ml-3 w-5 h-5" />}
                   href="/dash"
                   onClick={(e: any) => {
-                    handlePageChange("home", "home", e);
+                    handlePageChange("DashHomePage", "DashHomePage", e);
                   }}
-                  pageIndex={"home"}
+                  pageIndex={"DashHomePage"}
                   page="Schedule Event"
                   selectedDiv={selectedDiv}
                 />
@@ -108,7 +111,7 @@ const Dash = ({ children }: any) => {
 
               <div>
                 <SidebarBtn
-                  icon={<RiVipCrown2Line className="ml-3 w-5 h-5" />}
+                  icon={<MdSupervisorAccount className="ml-3 w-5 h-5" />}
                   href="/dash"
                   onClick={(e: any) => {
                     handlePageChange("page4", "page4", e);
@@ -131,12 +134,25 @@ const Dash = ({ children }: any) => {
                   selectedDiv={selectedDiv}
                 />
               </div>
+
+              <div className="absolute bottom-5">
+                <SidebarBtn
+                  icon={<TbLogout2 className="ml-3 w-5 h-5" />}
+                  href="/dash"
+                  onClick={(e: any) => {
+                    handlePageChange("page4", "page4", e);
+                  }}
+                  pageIndex={"page4"}
+                  page="LogOut"
+                  selectedDiv={selectedDiv}
+                />
+              </div>
             </nav>
           </div>
         </div>
 
         {/* Content Area */}
-        <div className="flex-1">
+        <div className="flex-1 ">
           <button
             className="md:hidden fixed top-4 left-4 bg-gray-800 text-white px-4 py-2 rounded-lg z-10"
             onClick={toggleSidebar}
@@ -144,7 +160,7 @@ const Dash = ({ children }: any) => {
             {sidebarOpen ? "Close Sidebar" : "Open Sidebar"}
           </button>
           {/* Content Placement */}
-          <div className="md:ml-6">{renderPage()}</div>
+          <div className="md:pl-8 bg-gray-50 h-full">{renderPage()}</div>
         </div>
       </div>
     </>
