@@ -6,18 +6,20 @@ import { MdKeyboardDoubleArrowLeft } from "react-icons/md";
 import Button from "@/app/(components)/Button";
 import { FaPlus } from "react-icons/fa6";
 import { GrSchedulePlay } from "react-icons/gr";
-import { MdOutlineAnalytics } from "react-icons/md";
 import { LuClock3 } from "react-icons/lu";
 import { RiVipCrown2Line } from "react-icons/ri";
+import SidebarBtn from "@/app/(components)/SidebarBtn";
+import { TbBrandGoogleAnalytics } from "react-icons/tb";
 
 const Dash = ({ children }: any) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState("home");
-  const [selectedDiv, setSelectedDiv] = useState("");
+  const [selectedDiv, setSelectedDiv] = useState("home");
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
   };
-  const handlePageChange = (page: any, divId: string) => {
+  const handlePageChange = (page: any, divId: string, e: any) => {
+    e.preventDefault();
     setCurrentPage(page);
     setSelectedDiv(divId);
   };
@@ -29,6 +31,10 @@ const Dash = ({ children }: any) => {
         return <div>page1</div>;
       case "page2":
         return <div>page2</div>;
+      case "page3":
+        return <div>page3</div>;
+      case "page4":
+        return <div>page4</div>;
       default:
         return <div>Home</div>;
     }
@@ -61,49 +67,69 @@ const Dash = ({ children }: any) => {
 
             {/* Nav bar start's here */}
             <nav className="mt-4 flex flex-col gap-2">
-              <div
-                className={` hover:text-[#0069FF]  rounded-lg font-bold text-black h-[44px] ${
-                  selectedDiv === "home" ? "bg-[#bdddff] text-[#0069FF]" : ""
-                }`}
-              >
-                <a
-                  href=""
-                  className="py-2 flex gap-3 items-center"
-                  onClick={() => handlePageChange("home", "home")}
-                >
-                  <GrSchedulePlay className="ml-3 w-5 h-5" />
-                  Schedule Event
-                </a>
+              <div>
+                <SidebarBtn
+                  icon={<GrSchedulePlay className="ml-3 w-5 h-5" />}
+                  href="/dash"
+                  onClick={(e: any) => {
+                    handlePageChange("home", "home", e);
+                  }}
+                  pageIndex={"home"}
+                  page="Schedule Event"
+                  selectedDiv={selectedDiv}
+                />
               </div>
-              <div className="hover:bg-[#d5e6f7] hover:text-[#0069FF]  rounded-lg font-bold text-black ">
-                <a
-                  href=""
-                  className="py-2 flex gap-3 items-center"
-                  onClick={() => handlePageChange("home", "home")}
-                >
-                  <MdOutlineAnalytics className="ml-3 w-6 h-6" />
-                  Analytics
-                </a>
+
+              <div>
+                <SidebarBtn
+                  icon={<TbBrandGoogleAnalytics className="ml-3 w-5 h-5" />}
+                  href="/dash"
+                  onClick={(e: any) => {
+                    handlePageChange("page1", "page1", e);
+                  }}
+                  pageIndex={"page1"}
+                  page="Analytics"
+                  selectedDiv={selectedDiv}
+                />
               </div>
-              <div className="hover:bg-[#d5e6f7] hover:text-[#0069FF]  rounded-lg font-bold text-black ">
-                <a
-                  href=""
-                  className="py-2 flex gap-3 items-center"
-                  onClick={() => handlePageChange("home", "home")}
-                >
-                  <LuClock3 className="ml-3 w-5 h-5" />
-                  Avilability
-                </a>
+
+              <div>
+                <SidebarBtn
+                  icon={<LuClock3 className="ml-3 w-5 h-5" />}
+                  href="/dash"
+                  onClick={(e: any) => {
+                    handlePageChange("page2", "page2", e);
+                  }}
+                  pageIndex={"page2"}
+                  page="Avilibility"
+                  selectedDiv={selectedDiv}
+                />
               </div>
-              <div className="hover:bg-[#d5e6f7] hover:text-[#0069FF]  rounded-lg font-bold text-black ">
-                <a
-                  href=""
-                  className="py-2 flex gap-3 items-center"
-                  onClick={() => handlePageChange("home", "home")}
-                >
-                  <RiVipCrown2Line className="ml-3 w-5 h-5" />
-                  Admin Center
-                </a>
+
+              <div>
+                <SidebarBtn
+                  icon={<RiVipCrown2Line className="ml-3 w-5 h-5" />}
+                  href="/dash"
+                  onClick={(e: any) => {
+                    handlePageChange("page4", "page4", e);
+                  }}
+                  pageIndex={"page4"}
+                  page="profile"
+                  selectedDiv={selectedDiv}
+                />
+              </div>
+
+              <div>
+                <SidebarBtn
+                  icon={<RiVipCrown2Line className="ml-3 w-5 h-5" />}
+                  href="/dash"
+                  onClick={(e: any) => {
+                    handlePageChange("page4", "page4", e);
+                  }}
+                  pageIndex={"page4"}
+                  page="Admin"
+                  selectedDiv={selectedDiv}
+                />
               </div>
             </nav>
           </div>
@@ -111,14 +137,12 @@ const Dash = ({ children }: any) => {
 
         {/* Content Area */}
         <div className="flex-1">
-          {/* Toggle Sidebar Button - Visible on Small Screens */}
           <button
             className="md:hidden fixed top-4 left-4 bg-gray-800 text-white px-4 py-2 rounded-lg z-10"
             onClick={toggleSidebar}
           >
             {sidebarOpen ? "Close Sidebar" : "Open Sidebar"}
           </button>
-
           {/* Content Placement */}
           <div className="md:ml-6">{renderPage()}</div>
         </div>
@@ -126,74 +150,4 @@ const Dash = ({ children }: any) => {
     </>
   );
 };
-
 export default Dash;
-
-// "use client";
-// import React, { useState } from "react";
-// import HomePage from "@/app/(pages)/availibility/page";
-// import Page1 from "@/app/(pages)/eventBooking/page";
-// import Page2 from "@/app/(pages)/scheduleEvent/page";
-
-// const Dash = () => {
-//   const [currentPage, setCurrentPage] = useState("home");
-
-//   const handlePageChange = (page: any) => {
-//     setCurrentPage(page);
-//   };
-
-//   // Render the current page based on the currentPage state
-//   const renderPage = () => {
-//     switch (currentPage) {
-//       case "home":
-//         return <HomePage />;
-//       case "page1":
-//         return <Page1 />;
-//       case "page2":
-//         return <Page2 />;
-//       default:
-//         return <HomePage />;
-//     }
-//   };
-
-//   return (
-//     <>
-//       <div className="flex h-screen">
-//         {/* Sidebar */}
-//         <div className="fixed left-0 top-0 h-full bg-gray-800 text-white w-[260px] transition-transform duration-500 ease-in-out overflow-y-auto md:translate-x-0 md:static md:bg-transparent md:text-black">
-//           <div className="p-4">
-//             <h2 className="text-2xl font-bold">Sidebar</h2>
-//             <nav className="mt-4">
-//               <a
-//                 href="#"
-//                 onClick={() => handlePageChange("home")}
-//                 className="block py-2 hover:text-gray-400"
-//               >
-//                 Home
-//               </a>
-//               <a
-//                 href="#"
-//                 onClick={() => handlePageChange("page1")}
-//                 className="block py-2 hover:text-gray-400"
-//               >
-//                 Page 1
-//               </a>
-//               <a
-//                 href="#"
-//                 onClick={() => handlePageChange("page2")}
-//                 className="block py-2 hover:text-gray-400"
-//               >
-//                 Page 2
-//               </a>
-//             </nav>
-//           </div>
-//         </div>
-
-//         {/* Content Area */}
-//         <div className="flex-1 md:ml-60"> {renderPage()} </div>
-//       </div>
-//     </>
-//   );
-// };
-
-// export default Dash;
