@@ -20,7 +20,7 @@ export default function ScheduleMeeting() {
   const handleDateChange = (value: any) => {
     setSelectedDate(value);
   };
-  // console.log("selectedDate", selectedDate);
+
   const handleChange = (event: any) => {
     setTimezone(event.target.value);
   };
@@ -93,7 +93,7 @@ export default function ScheduleMeeting() {
     timezone: timezone,
     formatDate: formatDate(selectedDate),
   };
-  console.log("senddata=>", senddata);
+  // console.log("senddata=>", senddata);
   return (
     <>
       <div className="flex justify-center items-center h-screen">

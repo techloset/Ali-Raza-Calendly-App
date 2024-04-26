@@ -38,19 +38,21 @@ export default function scheduleEvent() {
               </div>
               <div className="flex gap-2 items-center mt-5">
                 <div className="flex  items-center gap-2 text-gray-500">
-                  <MdEvent className="w-6 h-6" />
+                  <MdEvent className="w-4 h-6" />
+                  {selectedTime}
+                  {formatDate}
                 </div>
               </div>
               <div className="flex gap-2 items-center mt-5">
                 <div className="flex gap-2 items-center text-gray-500">
                   <GiWorld />
-                  Pakistan Maldives Time
+                  {timezone}
                 </div>
               </div>
 
               <div className="flex gap-24 absolute bottom-6">
-                <div className="text-sm  text-blue-600">Cookie settings</div>
-                <div className="text-sm  ">Report abuse</div>
+                <div className="text-sm text-blue-600">Cookie settings</div>
+                <div className="text-sm">Report abuse</div>
               </div>
             </div>
 
