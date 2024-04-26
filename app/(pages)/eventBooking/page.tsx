@@ -6,19 +6,21 @@ import { FaRegClock } from "react-icons/fa";
 import "react-calendar/dist/Calendar.css";
 import { GrTroubleshoot } from "react-icons/gr";
 import cornerimage from "@/app/(asset)/images/avilibility_images/Topcornerimage.svg";
+import Link from "next/link";
 
 type ValuePiece = Date | null;
 type Value = ValuePiece | [ValuePiece, ValuePiece];
+
 export default function ScheduleMeeting() {
   const [value, onChange] = useState<Value>(new Date());
   const [timezone, setTimezone] = useState("");
   const [currentTime, setCurrentTime] = useState("");
   const [selectedDate, setSelectedDate] = useState(new Date());
-
+  const [selectedTime, setSelectedTime] = useState("");
   const handleDateChange = (value: any) => {
     setSelectedDate(value);
   };
-  console.log("selectedDate", selectedDate);
+  // console.log("selectedDate", selectedDate);
   const handleChange = (event: any) => {
     setTimezone(event.target.value);
   };
@@ -79,7 +81,6 @@ export default function ScheduleMeeting() {
   const [isVisible, setIsVisible] = useState<boolean[]>(
     Array(timeSlots.length).fill(true)
   );
-  // State to track visibility
 
   const handleToggle = (index: number) => {
     setIsVisible((prev) =>
@@ -87,6 +88,12 @@ export default function ScheduleMeeting() {
     );
   };
 
+  const senddata = {
+    selectedTime: selectedTime,
+    timezone: timezone,
+    formatDate: formatDate(selectedDate),
+  };
+  console.log("senddata=>", senddata);
   return (
     <>
       <div className="flex justify-center items-center h-screen">
@@ -177,7 +184,10 @@ export default function ScheduleMeeting() {
                       }`}
                       onClick={() => handleToggle(index)}
                     >
-                      <button className="w-full flex justify-center border-2 border-blue-500 p-5 text-blue-600 mx-2 rounded-lg cursor-pointer">
+                      <button
+                        className="w-full flex justify-center border-2 border-blue-500 p-5 text-blue-600 mx-2 rounded-lg cursor-pointer"
+                        onClick={() => setSelectedTime(timeSlot.start)}
+                      >
                         {timeSlot.start}
                       </button>
                     </div>
@@ -189,12 +199,16 @@ export default function ScheduleMeeting() {
                       <button className="w-1/2 flex justify-center border-2 border-transparent p-5 text-white bg-gray-600 rounded-lg cursor-pointer">
                         {timeSlot.start}
                       </button>
-                      <button
-                        className="w-1/2 flex justify-center border-2 border-transparent p-5 rounded-lg cursor-pointer bg-blue-500 text-white"
-                        onClick={() => handleToggle(index)}
+                      <Link
+                        href={{
+                          pathname: "/scheduleEvent",
+                          query: senddata as any,
+                        }}
                       >
-                        Next
-                      </button>
+                        <button className="w-1/2 flex justify-center border-2 border-transparent p-5 text-white bg-blue-600 rounded-lg cursor-pointer">
+                          Next
+                        </button>
+                      </Link>
                     </div>
                   </div>
                 ))}

@@ -7,10 +7,17 @@ import { GiWorld } from "react-icons/gi";
 import InputField from "@/app/(components)/Input";
 import Button from "@/app/(components)/Button";
 import cornerimage from "@/app/(asset)/images/avilibility_images/Topcornerimage.svg";
+import { useSearchParams } from "next/navigation";
 
 export default function scheduleEvent() {
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
+  const searchParams = useSearchParams();
+  const selectedTime = searchParams.get("selectedTime");
+  const timezone = searchParams.get("timezone");
+  const formatDate = searchParams.get("formatDate");
+  console.table({ selectedTime, timezone, formatDate });
+
   return (
     <>
       <div className="flex justify-center items-center h-screen">
@@ -32,7 +39,6 @@ export default function scheduleEvent() {
               <div className="flex gap-2 items-center mt-5">
                 <div className="flex  items-center gap-2 text-gray-500">
                   <MdEvent className="w-6 h-6" />
-                  11:00am-11:30am, Wednesday, March 27, 2024
                 </div>
               </div>
               <div className="flex gap-2 items-center mt-5">
