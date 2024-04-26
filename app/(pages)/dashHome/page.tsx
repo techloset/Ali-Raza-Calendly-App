@@ -5,7 +5,7 @@ import { CiExport } from "react-icons/ci";
 import { IoFilter } from "react-icons/io5";
 import { FaCaretRight } from "react-icons/fa";
 
-export default function DashHOme() {
+export default function DashHome() {
   return (
     <>
       <div className="flex items-center justify-end  mr-6 h-[72px]">
@@ -27,8 +27,8 @@ export default function DashHOme() {
       </div>
       <div className=" mt-8 rounded-lg border-2 mr-8">
         <div className="felx justify-between items-end p-1  h-16 bg-white rounded-t-lg">
-          <div className="flex justify-between items-center bg-white  h-14 mx-5  border-red-500">
-            <div className="flex items-center gap-x-5 h-14  border-red-500">
+          <div className="flex justify-between items-center bg-white  h-14 mx-5  ">
+            <div className="flex items-center gap-x-5 h-14  ">
               <div className="cursor-pointer px-3 py-5 hover:border-b-4 hover:border-blue-500">
                 Upcoming
               </div>
@@ -63,9 +63,111 @@ export default function DashHOme() {
           Wednesday, 27th March 2024
         </div>
         {/* Meeting data starts here */}
-        <div className="flex flex-col overflow-auto h-[300px] ">
+        <div className="flex flex-col overflow-auto ">
           {/* put data of the meeting here   */}
-          <div className="flex border-b-2 bg-white min-h-16 h-24 justify-between pr-4 items-center">
+          <div className="flex border-b-2 bg-white min-h-16 h-20 justify-between pr-4 items-center">
+            <div className="flex items-center px-5 gap-3  h-full">
+              <div className="h-5 w-5 rounded-full bg-purple-600"></div>
+              <div className="">11:30am - 12:00pm</div>
+            </div>
+            <div className="">
+              <div className="">Test</div>
+              <div className="">
+                Event type <span className="font-bold">30 Minute Meeting</span>
+              </div>
+            </div>
+            <div className="">1 host | 0 participant</div>
+            <div className="flex gap-2 justify-center items-center">
+              <FaCaretRight />
+              Details
+            </div>
+          </div>
+          <div className="flex border-b-2 bg-white min-h-16 h-20 justify-between pr-4 items-center">
+            <div className="flex items-center px-5 gap-3  h-full">
+              <div className="h-5 w-5 rounded-full bg-purple-600"></div>
+              <div className="">11:30am - 12:00pm</div>
+            </div>
+            <div className="">
+              <div className="">Test</div>
+              <div className="">
+                Event type <span className="font-bold">30 Minute Meeting</span>
+              </div>
+            </div>
+            <div className="">1 host | 0 participant</div>
+            <div className="flex gap-2 justify-center items-center">
+              <FaCaretRight />
+              Details
+            </div>
+          </div>
+          <div className="flex border-b-2 bg-white min-h-16 h-20 justify-between pr-4 items-center">
+            <div className="flex items-center px-5 gap-3  h-full">
+              <div className="h-5 w-5 rounded-full bg-purple-600"></div>
+              <div className="">11:30am - 12:00pm</div>
+            </div>
+            <div className="">
+              <div className="">Test</div>
+              <div className="">
+                Event type <span className="font-bold">30 Minute Meeting</span>
+              </div>
+            </div>
+            <div className="">1 host | 0 participant</div>
+            <div className="flex gap-2 justify-center items-center">
+              <FaCaretRight />
+              Details
+            </div>
+          </div>
+          <div className="flex border-b-2 bg-white min-h-16 h-20 justify-between pr-4 items-center">
+            <div className="flex items-center px-5 gap-3  h-full">
+              <div className="h-5 w-5 rounded-full bg-purple-600"></div>
+              <div className="">11:30am - 12:00pm</div>
+            </div>
+            <div className="">
+              <div className="">Test</div>
+              <div className="">
+                Event type <span className="font-bold">30 Minute Meeting</span>
+              </div>
+            </div>
+            <div className="">1 host | 0 participant</div>
+            <div className="flex gap-2 justify-center items-center">
+              <FaCaretRight />
+              Details
+            </div>
+          </div>
+          <div className="flex border-b-2 bg-white min-h-16 h-20  justify-between pr-4 items-center">
+            <div className="flex items-center px-5 gap-3  h-full">
+              <div className="h-5 w-5 rounded-full bg-purple-600"></div>
+              <div className="">11:30am - 12:00pm</div>
+            </div>
+            <div className="">
+              <div className="">Test</div>
+              <div className="">
+                Event type <span className="font-bold">30 Minute Meeting</span>
+              </div>
+            </div>
+            <div className="">1 host | 0 participant</div>
+            <div className="flex gap-2 justify-center items-center">
+              <FaCaretRight />
+              Details
+            </div>
+          </div>
+          <div className="flex border-b-2 bg-white min-h-16 h-20  justify-between pr-4 items-center">
+            <div className="flex items-center px-5 gap-3  h-full">
+              <div className="h-5 w-5 rounded-full bg-purple-600"></div>
+              <div className="">11:30am - 12:00pm</div>
+            </div>
+            <div className="">
+              <div className="">Test</div>
+              <div className="">
+                Event type <span className="font-bold">30 Minute Meeting</span>
+              </div>
+            </div>
+            <div className="">1 host | 0 participant</div>
+            <div className="flex gap-2 justify-center items-center">
+              <FaCaretRight />
+              Details
+            </div>
+          </div>
+          <div className="flex border-b-2 bg-white min-h-16 h-20  justify-between pr-4 items-center">
             <div className="flex items-center px-5 gap-3  h-full">
               <div className="h-5 w-5 rounded-full bg-purple-600"></div>
               <div className="">11:30am - 12:00pm</div>

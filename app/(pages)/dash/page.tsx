@@ -181,13 +181,14 @@ import { LuClock3 } from "react-icons/lu";
 import { RiVipCrown2Line } from "react-icons/ri";
 import SidebarBtn from "@/app/(components)/SidebarBtn";
 import DashHome from "../dashHome/page";
+import { TbBrandGoogleAnalytics } from "react-icons/tb";
 import { TbLogout2 } from "react-icons/tb";
 import { MdSupervisorAccount } from "react-icons/md";
 import Profile from "../profile/page";
 
 const Dash = ({ children }: any) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [currentPage, setCurrentPage] = useState("DashHomePage");
+  const [currentPage, setCurrentPage] = useState("");
   const [selectedDiv, setSelectedDiv] = useState("DashHomePage");
 
   const toggleSidebar = () => {
@@ -202,8 +203,6 @@ const Dash = ({ children }: any) => {
 
   const renderPage = () => {
     switch (currentPage) {
-      case "DashHomePage":
-        return <DashHome />;
       case "page1":
         return <div>page1</div>;
       case "page2":
@@ -213,7 +212,7 @@ const Dash = ({ children }: any) => {
       case "profile":
         return <Profile />;
       default:
-        return <div>Home</div>;
+        return <DashHome />;
     }
   };
 
@@ -258,7 +257,7 @@ const Dash = ({ children }: any) => {
 
             <div>
               <SidebarBtn
-                icon={<RiVipCrown2Line className="ml-3 w-5 h-5" />}
+                icon={<TbBrandGoogleAnalytics className="ml-3 w-5 h-5" />}
                 href="/dash"
                 onClick={(e: any) => {
                   handlePageChange("page1", "page1", e);
@@ -308,10 +307,10 @@ const Dash = ({ children }: any) => {
               />
             </div>
 
-            <div className="absolute bottom-5">
+            <div className="absolute w-full  bottom-5">
               <SidebarBtn
                 icon={<TbLogout2 className="ml-3 w-5 h-5" />}
-                href="/profile"
+                href="/dash"
                 onClick={(e: any) => {
                   handlePageChange("page4", "page4", e);
                 }}
@@ -333,9 +332,7 @@ const Dash = ({ children }: any) => {
           {sidebarOpen ? "Close Sidebar" : "Open Sidebar"}
         </button>
         {/* Content Placement */}
-        <div className="md:pl-8  bg-gray-50 border-4 border-red-600">
-          {renderPage()}
-        </div>
+        <div className="md:pl-8  bg-gray-50 ">{renderPage()}</div>
       </div>
     </div>
   );

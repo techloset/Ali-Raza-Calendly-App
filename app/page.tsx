@@ -11,7 +11,6 @@ export default function Home() {
 
   return (
     <div>
-      Home
       <Test />
       <button className="bg-red-500 text-white m-10">
         <Link href="/availibility">Availibility</Link>

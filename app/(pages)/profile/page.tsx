@@ -130,7 +130,7 @@ export default function Profile() {
                 value={state.dateFormate}
                 onChange={handelChange}
                 options={languages}
-                defaultOption={"Choose date formate"}
+                defaultOption={"Choose date format"}
               />
             </div>
             <div className="w-full">
@@ -141,7 +141,7 @@ export default function Profile() {
                 value={state.timeFormate}
                 onChange={handelChange}
                 options={languages}
-                defaultOption={"Choose time formate"}
+                defaultOption={"Choose time format"}
               />
             </div>
           </div>
