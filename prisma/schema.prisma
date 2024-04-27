@@ -21,6 +21,16 @@ model User {
   @@map("users")
 }
 
+model ScheduledEvents {
+  id           String @id @default(auto()) @map("_id") @db.ObjectId
+  name         String
+  email        String
+  textArea     String
+  selectedTime String
+  timezone     String
+  formatDate   String
+}
+
 model Session {
   id           String   @id @default(auto()) @map("_id") @db.ObjectId
   sessionToken String   @unique

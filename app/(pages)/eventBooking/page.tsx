@@ -17,6 +17,8 @@ export default function ScheduleMeeting() {
   const [currentTime, setCurrentTime] = useState("");
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [selectedTime, setSelectedTime] = useState("");
+  const [isHidden, setIsHidden] = useState(true);
+
   const handleDateChange = (value: any) => {
     setSelectedDate(value);
   };
@@ -93,7 +95,7 @@ export default function ScheduleMeeting() {
     timezone: timezone,
     formatDate: formatDate(selectedDate),
   };
-  // console.log("senddata=>", senddata);
+  console.log("senddata=>", senddata);
   return (
     <>
       <div className="flex justify-center items-center h-screen">
@@ -186,9 +188,14 @@ export default function ScheduleMeeting() {
                     >
                       <button
                         className="w-full flex justify-center border-2 border-blue-500 p-5 text-blue-600 mx-2 rounded-lg cursor-pointer"
-                        onClick={() => setSelectedTime(timeSlot.start)}
+                        onClick={() =>
+                          setSelectedTime(timeSlot.start + " - " + timeSlot.end)
+                        }
                       >
                         {timeSlot.start}
+                        {isHidden ? null : (
+                          <span className="display-none ">{timeSlot.end}</span>
+                        )}
                       </button>
                     </div>
                     <div
@@ -204,10 +211,9 @@ export default function ScheduleMeeting() {
                           pathname: "/scheduleEvent",
                           query: senddata as any,
                         }}
+                        className="w-1/2 flex justify-center border-2 border-transparent p-5 text-white bg-blue-600 rounded-lg cursor-pointer"
                       >
-                        <button className="w-1/2 flex justify-center border-2 border-transparent p-5 text-white bg-blue-600 rounded-lg cursor-pointer">
-                          Next
-                        </button>
+                        <button className="">Next</button>
                       </Link>
                     </div>
                   </div>

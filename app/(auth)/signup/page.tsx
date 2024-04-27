@@ -26,6 +26,17 @@ export default function Signup() {
       toast.error("Please fill in all required fields.");
       return;
     }
+    if (password.length < 6 || password.length > 15) {
+      return toast.error(
+        "Password least 6 characters long and less than 15 characters long"
+      );
+    }
+    if (name.length || username.length < 4) {
+      return toast.error("Name and Username least 4 characters long");
+    }
+    if (email.length < 4) {
+      return toast.error("Email least 4 characters long");
+    }
 
     try {
       const res = await axios.post("/api/register", {

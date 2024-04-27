@@ -8,15 +8,57 @@ import InputField from "@/app/(components)/Input";
 import Button from "@/app/(components)/Button";
 import cornerimage from "@/app/(asset)/images/avilibility_images/Topcornerimage.svg";
 import { useSearchParams } from "next/navigation";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 export default function scheduleEvent() {
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
+  const [textArea, setTextArea] = useState<string>("");
   const searchParams = useSearchParams();
   const selectedTime = searchParams.get("selectedTime");
   const timezone = searchParams.get("timezone");
   const formatDate = searchParams.get("formatDate");
   console.table({ selectedTime, timezone, formatDate });
+
+  const handleSubmit = async () => {
+    if (!name || !email || !textArea) {
+      return toast.error("Please fill all required fields");
+    }
+    if (name.length < 3) {
+      return toast.error("Please enter more than 3 characters in Name");
+    }
+    if (email.length < 3) {
+      return toast.error("Please enter more than 3 characters in Email");
+    }
+    if (textArea.length < 10) {
+      return toast.error("Please enter more than 10 characters in Details");
+    }
+
+    try {
+      console.log(
+        "data",
+        name,
+        email,
+        textArea,
+        selectedTime,
+        timezone,
+        formatDate
+      );
+      const res = await axios.post("/api/scheduleevent", {
+        name,
+        email,
+        textArea,
+        selectedTime,
+        timezone,
+        formatDate,
+      });
+      toast.success("Event scheduled successfully");
+    } catch (error) {
+      console.log("error", error);
+      toast.error("Something went wrong in Event scheduling");
+    }
+  };
 
   return (
     <>
@@ -39,8 +81,7 @@ export default function scheduleEvent() {
               <div className="flex gap-2 items-center mt-5">
                 <div className="flex  items-center gap-2 text-gray-500">
                   <MdEvent className="w-4 h-6" />
-                  {selectedTime}
-                  {formatDate}
+                  {selectedTime}, {formatDate}
                 </div>
               </div>
               <div className="flex gap-2 items-center mt-5">
@@ -69,7 +110,9 @@ export default function scheduleEvent() {
                   name="Name"
                   placeholder="Enter Name"
                   type="text"
-                  onChange={() => {}}
+                  onChange={(e) => {
+                    setName(e.target.value);
+                  }}
                   value={name}
                   id="Name"
                 />
@@ -82,7 +125,9 @@ export default function scheduleEvent() {
                   name="Email"
                   placeholder="Enter Email"
                   type="email"
-                  onChange={() => {}}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                  }}
                   value={email}
                   id="Email"
                 />
@@ -92,8 +137,12 @@ export default function scheduleEvent() {
               </div>
               <div className="textarea">
                 <textarea
-                  className="w-full h-[150px] mt-3 rounded-md border-2 border-gray-400"
+                  className="w-full h-[150px] mt-3 rounded-md border-2 border-gray-400 placeholder:ml-5 text-ml-10"
                   placeholder="Enter Details"
+                  onChange={(e) => {
+                    setTextArea(e.target.value);
+                  }}
+                  value={textArea}
                 />
                 <div className="text-sm text-gray-500 mt-5">
                   By procedding, you confirm that you have read and agree to our{" "}
@@ -105,8 +154,18 @@ export default function scheduleEvent() {
                     Privacy Policy
                   </span>
                 </div>
-                <div className="mt-7">
-                  <Button name="Schedule Event" onClick={() => {}} />
+                <div
+                  className="mt-7"
+                  onSubmit={() => {
+                    handleSubmit();
+                  }}
+                >
+                  <Button
+                    name="Schedule Event"
+                    onClick={() => {
+                      handleSubmit();
+                    }}
+                  />
                 </div>
               </div>
             </div>
