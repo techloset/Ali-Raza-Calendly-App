@@ -7,10 +7,16 @@ import { LuUser2 } from "react-icons/lu";
 import { GrSchedule } from "react-icons/gr";
 import { BiWorld } from "react-icons/bi";
 import cornerimage from "@/app/(asset)/images/avilibility_images/Topcornerimage.svg";
+import { useSearchParams } from "next/navigation";
 
 export default function scheduled() {
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
+  const params = useSearchParams();
+  const selectedTime = params.get("selectedTime");
+  const timezone = params.get("timezone");
+  const formatDate = params.get("formatDate");
+
   return (
     <>
       <div className="flex justify-center items-center h-screen">
@@ -47,12 +53,12 @@ export default function scheduled() {
                 <div className="flex items-center gap-2 mt-3">
                   <GrSchedule />
                   <div className="text-sm">
-                    11:00am-11:30am, Wednesday, March 27, 2024
+                    {selectedTime} {formatDate}
                   </div>
                 </div>
                 <div className="flex items-center gap-2 mt-3">
                   <BiWorld />
-                  <div className="text-sm">Pakistan, Maldives Time</div>
+                  <div className="text-sm">{timezone}</div>
                 </div>
               </div>
             </div>

@@ -10,11 +10,14 @@ import cornerimage from "@/app/(asset)/images/avilibility_images/Topcornerimage.
 import { useSearchParams } from "next/navigation";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { LoadingSpinner } from "baseui/button/styled-components";
+import Link from "next/link";
 
 export default function scheduleEvent() {
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [textArea, setTextArea] = useState<string>("");
+  const [isLoading, setIsLoading] = useState(false);
   const searchParams = useSearchParams();
   const selectedTime = searchParams.get("selectedTime");
   const timezone = searchParams.get("timezone");
@@ -35,16 +38,8 @@ export default function scheduleEvent() {
       return toast.error("Please enter more than 10 characters in Details");
     }
 
+    setIsLoading(true);
     try {
-      console.log(
-        "data",
-        name,
-        email,
-        textArea,
-        selectedTime,
-        timezone,
-        formatDate
-      );
       const res = await axios.post("/api/scheduleevent", {
         name,
         email,
@@ -53,10 +48,13 @@ export default function scheduleEvent() {
         timezone,
         formatDate,
       });
+
       toast.success("Event scheduled successfully");
+      setIsLoading(false);
     } catch (error) {
       console.log("error", error);
       toast.error("Something went wrong in Event scheduling");
+      setIsLoading(false);
     }
   };
 
@@ -154,19 +152,26 @@ export default function scheduleEvent() {
                     Privacy Policy
                   </span>
                 </div>
-                <div
-                  className="mt-7"
-                  onSubmit={() => {
-                    handleSubmit();
+                <Link
+                  href={{
+                    pathname: "/scheduled",
+                    query: {
+                      selectedTime,
+                      timezone,
+                      formatDate,
+                    },
                   }}
                 >
-                  <Button
-                    name="Schedule Event"
-                    onClick={() => {
-                      handleSubmit();
-                    }}
-                  />
-                </div>
+                  <div className="mt-7">
+                    {isLoading && <LoadingSpinner />}
+                    <Button
+                      name="Schedule Event"
+                      onClick={() => {
+                        handleSubmit();
+                      }}
+                    />
+                  </div>
+                </Link>
               </div>
             </div>
 
