@@ -1,61 +1,27 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import SignupLogo from "../../(asset)/images/auth_images/logo-calendly.svg";
 import Dontworry from "../../(asset)/images/avilibility_images/Dontworry.svg";
 import Image from "next/image";
 import Bookmarkdesign from "../../(asset)/images/avilibility_images/bookmark_and_plus.png";
 import loadingImg from "../../(asset)/images/avilibility_images/Progressbar.png";
 import Button from "@/app/(components)/Button";
+import useAvailibility from "./useAvailibility";
+import Link from "next/link";
+
 export default function Availibility() {
-  const [startTime, setStartTime] = useState("00:00");
-  const [endTime, setEndTime] = useState("00:30");
-  const [selectedDays, setSelectedDays] = useState<string[]>([]);
-
-  const days = [
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-    "Sunday",
-  ];
-
-  const handleDayChange = (day: string) => {
-    if (selectedDays.includes(day)) {
-      setSelectedDays(
-        selectedDays.filter((selectedDay) => selectedDay !== day)
-      );
-    } else {
-      setSelectedDays([...selectedDays, day]);
-    }
-  };
-
-  const generateTimeSlots = () => {
-    const slots = [];
-    for (let hour = 0; hour < 24; hour++) {
-      for (let minute = 0; minute < 60; minute += 60) {
-        let hourString = hour.toString().padStart(2, "0");
-        let minuteString = minute.toString().padStart(2, "0");
-        let time = `${hourString}:${minuteString}`;
-        if (hour > 11) {
-          time += " PM";
-        } else {
-          time += " AM";
-        }
-        slots.push(time);
-      }
-    }
-    return slots;
-  };
-
-  const handleStartTimeChange = (event: any) => {
-    setStartTime(event.target.value);
-  };
-
-  const handleEndTimeChange = (event: any) => {
-    setEndTime(event.target.value);
-  };
+  const {
+    handleStartTimeChange,
+    handleEndTimeChange,
+    handleDayChange,
+    loading,
+    days,
+    selectedDays,
+    startingHour,
+    endingHour,
+    generateTimeSlots,
+    handleSubmit,
+  } = useAvailibility();
 
   return (
     <>
@@ -95,11 +61,11 @@ export default function Availibility() {
                 <div className="flex justify-center">
                   <select
                     className=" mr-4 w-[278px] h-14 rounded-xl pl-3 border-2 cursor-pointer"
-                    value={startTime}
+                    value={startingHour}
                     onChange={handleStartTimeChange}
                   >
-                    {generateTimeSlots().map((time) => (
-                      <option key={time} value={time}>
+                    {generateTimeSlots().map((time, index) => (
+                      <option key={index} value={index}>
                         {time}
                       </option>
                     ))}
@@ -107,11 +73,11 @@ export default function Availibility() {
                   <span></span>
                   <select
                     className="ml-4 w-[278px] h-14 rounded-xl p-4 border-2 cursor-pointer"
-                    value={endTime}
+                    value={endingHour}
                     onChange={handleEndTimeChange}
                   >
-                    {generateTimeSlots().map((time) => (
-                      <option key={time} value={time}>
+                    {generateTimeSlots().map((time, index) => (
+                      <option key={index} value={index}>
                         {time}
                       </option>
                     ))}
@@ -167,9 +133,13 @@ export default function Availibility() {
                 Set up later
               </div>
             </div>
-            <div className="">
-              <Button name="Continue" onClick={() => {}} />
-            </div>
+            <Link href={"/dash"} className="">
+              <Button
+                name="Continue"
+                onClick={handleSubmit}
+                loading={loading}
+              />
+            </Link>
           </div>
         </div>
       </div>

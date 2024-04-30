@@ -165,6 +165,7 @@ export default function scheduleEvent() {
                   <div className="mt-7">
                     {isLoading && <LoadingSpinner />}
                     <Button
+                      loading={isLoading}
                       name="Schedule Event"
                       onClick={() => {
                         handleSubmit();

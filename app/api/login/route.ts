@@ -44,11 +44,38 @@ export const authOptions: AuthOptions = {
           return null;
         }
 
-        return user;
+        return {
+          id: user.id,
+          name: user.name,
+          email: user.email,
+        };
       },
     }),
   ],
+
   callbacks: {
+    async jwt({ token, user }) {
+      if (user) {
+        return { ...token, name: user.name, id: user.id, image: user.image };
+      }
+      return token;
+    },
+
+    async session({ session, token }): Promise<any> {
+      if (token && token.username) {
+        return {
+          ...session,
+          user: {
+            ...session.user,
+            name: token.name,
+            id: token.id,
+            image: token.image,
+          },
+        };
+      }
+      return session;
+    },
+
     async signIn({ account, profile }: any) {
       if (account?.provider === "google") {
         const existingUser = await prisma.user.findUnique({
@@ -60,6 +87,7 @@ export const authOptions: AuthOptions = {
           try {
             const newUser = await prisma.user.create({
               data: {
+                id: profile?.id,
                 name: profile?.name,
                 email: profile?.email,
                 username: profile?.email,

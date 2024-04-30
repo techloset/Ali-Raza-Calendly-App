@@ -31,12 +31,22 @@ model ScheduledEvents {
   formatDate   String
 }
 
-model Session {
+model availability {
   id           String   @id @default(auto()) @map("_id") @db.ObjectId
-  sessionToken String   @unique
-  userId       String   @db.ObjectId
-  expires      DateTime @map("expiresAt")
-  user         User     @relation(fields: [userId], references: [id])
+  startingHour Int
+  endingHour   Int
+  selectedDays String[]
+
+  @@map("availabilities")
+}
+
+model Session {
+  id             String   @id @default(auto()) @map("_id") @db.ObjectId
+  sessionToken   String   @unique
+  userId         String   @db.ObjectId
+  expires        DateTime @map("expiresAt")
+  user           User     @relation(fields: [userId], references: [id])
+  availabilityId String?  @db.ObjectId
 
   @@map("sessions")
 }

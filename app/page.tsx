@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import Test from "./(components)/Test";
 import { signOut } from "next-auth/react";
 import { redirect, useRouter } from "next/navigation";
@@ -8,6 +8,11 @@ import Link from "next/link";
 
 export default function Home() {
   const router = useRouter();
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleDropdown = () => {
+    setIsOpen(!isOpen);
+  };
 
   return (
     <div>
