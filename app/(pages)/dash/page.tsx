@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import logo from "@/app/(asset)/images/auth_images/logo-calendly.svg";
 import Image from "next/image";
 import { MdKeyboardDoubleArrowLeft } from "react-icons/md";
@@ -9,43 +9,21 @@ import { GrSchedulePlay } from "react-icons/gr";
 import { LuClock3 } from "react-icons/lu";
 import { RiVipCrown2Line } from "react-icons/ri";
 import SidebarBtn from "@/app/(components)/SidebarBtn";
-import DashHome from "../dashHome/page";
 import { TbBrandGoogleAnalytics } from "react-icons/tb";
 import { TbLogout2 } from "react-icons/tb";
 import { MdSupervisorAccount } from "react-icons/md";
-import Profile from "../profile/page";
 
+import useDash from "./useDash";
 const Dash = ({ children }: any) => {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [currentPage, setCurrentPage] = useState("");
-  const [selectedDiv, setSelectedDiv] = useState("DashHomePage");
-  const [loading, setLoading] = useState(false);
-
-  const toggleSidebar = () => {
-    setSidebarOpen(!sidebarOpen);
-  };
-
-  const handlePageChange = (page: any, divId: string, e: any) => {
-    e.preventDefault();
-    setCurrentPage(page);
-    setSelectedDiv(divId);
-  };
-
-  const renderPage = () => {
-    switch (currentPage) {
-      case "page1":
-        return <div>page1</div>;
-      case "page2":
-        return <div>page2</div>;
-      case "page3":
-        return <div>page3</div>;
-      case "profile":
-        return <Profile />;
-      default:
-        return <DashHome />;
-    }
-  };
-
+  const {
+    sidebarOpen,
+    toggleSidebar,
+    currentPage,
+    handlePageChange,
+    selectedDiv,
+    loading,
+    renderPage,
+  } = useDash();
   return (
     <div className="flex h-screen">
       {/* Sidebar */}

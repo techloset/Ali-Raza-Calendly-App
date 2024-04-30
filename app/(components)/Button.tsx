@@ -45,15 +45,7 @@ const Button = ({ name, onClick, loading }: ButtonProps) => {
         onClick={onClick}
         disabled={loading}
       >
-        {loading ? (
-          <div className="flex items-center space-x-2">
-            <div className="w-4 h-4 bg-white rounded-full animate-bounce"></div>
-            <div className="w-4 h-4 bg-white rounded-full animate-bounce"></div>
-            <div className="w-4 h-4 bg-white rounded-full animate-bounce"></div>
-          </div>
-        ) : (
-          name
-        )}
+        {loading ? <span className="text-white">Loading...</span> : name}
       </button>
     </div>
   );

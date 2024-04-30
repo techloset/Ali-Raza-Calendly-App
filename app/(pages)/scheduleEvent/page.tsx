@@ -32,7 +32,7 @@ export default function scheduleEvent() {
       return toast.error("Please enter more than 3 characters in Name");
     }
     if (email.length < 3) {
-      return toast.error("Please enter more than 3 characters in Email");
+      return toast.error("Please enter correct Email");
     }
     if (textArea.length < 10) {
       return toast.error("Please enter more than 10 characters in Details");

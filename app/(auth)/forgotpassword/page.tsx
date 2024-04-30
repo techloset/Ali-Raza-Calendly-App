@@ -1,51 +1,13 @@
 "use client";
 import Button from "@/app/(components)/Button";
 import InputField from "@/app/(components)/Input";
-import axios from "axios";
-import { signIn } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import React, { FormEvent, useState } from "react";
+import React from "react";
 import SignupLogo from "../../(asset)/images/auth_images/logo-calendly.svg";
-import Openeye from "../../(asset)/images/auth_images/Open-eye.png";
-import Closeeye from "../../(asset)/images/auth_images/Closed-eye.png";
-import toast from "react-hot-toast";
-
+import useForgotpassword from "./useForgotpassword";
 export default function Signup() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [username, setUsername] = useState("");
-  const [error, setError] = useState("");
-  const [isPasswordVisible, setPasswordVisible] = useState(false);
-  const router = useRouter();
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault();
-
-    try {
-      const res = await axios.post("api/register", {
-        email,
-        password,
-      });
-      await signIn("credentials", {
-        email,
-        password,
-        redirect: false,
-      });
-      toast.success("User created successfully");
-      router.push("/");
-
-      console.log(res);
-    } catch (error: any) {
-      toast.error(error?.response?.data);
-    }
-  };
-
-  const togglePasswordVisibility = () => {
-    setPasswordVisible(!isPasswordVisible);
-  };
-
+  const { email, setEmail, error, handleSubmit, loading } = useForgotpassword();
   return (
     <div className="bg-white mt-10">
       <div className=" text-md flex justify-center items-center">
@@ -94,6 +56,7 @@ export default function Signup() {
               onClick={() => {
                 handleSubmit;
               }}
+              loading={loading}
             />
           </div>
           <div className="flex items-center justify-center mt-4 text-sm text-center">

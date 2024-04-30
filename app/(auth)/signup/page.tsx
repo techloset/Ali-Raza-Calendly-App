@@ -1,62 +1,30 @@
 "use client";
 import Button from "@/app/(components)/Button";
 import InputField from "@/app/(components)/Input";
-import axios from "axios";
-import { signIn } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import React from "react";
 import SignupLogo from "../../(asset)/images/auth_images/logo-calendly.svg";
 import Openeye from "../../(asset)/images/auth_images/Open-eye.png";
 import Closeeye from "../../(asset)/images/auth_images/Closed-eye.png";
-import toast from "react-hot-toast";
+import useSignup from "./useSignup";
 
 export default function Signup() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [username, setUsername] = useState("");
-  const [error, setError] = useState("");
-  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-
-  const router = useRouter();
-  const handleSubmit = async () => {
-    if (!name || !username || !email || !password) {
-      toast.error("Please fill in all required fields.");
-      return;
-    }
-    if (password.length < 6 || password.length > 15) {
-      return toast.error(
-        "Password least 6 characters long and less than 15 characters long"
-      );
-    }
-    if (name.length || username.length < 4) {
-      return toast.error("Name and Username least 4 characters long");
-    }
-    if (email.length < 4) {
-      return toast.error("Email least 4 characters long");
-    }
-
-    try {
-      const res = await axios.post("/api/register", {
-        name,
-        username,
-        email,
-        password,
-      });
-
-      toast.success("User created successfully...");
-      router.push("/signin");
-    } catch (error: any) {
-      console.log("error", error);
-      toast.error(error?.response?.data || "Something went wrong.");
-    }
-  };
-
-  const togglePasswordVisibility = () => {
-    setIsPasswordVisible(!isPasswordVisible);
-  };
+  const {
+    email,
+    password,
+    name,
+    username,
+    error,
+    handleSubmit,
+    loading,
+    isPasswordVisible,
+    togglePasswordVisibility,
+    setEmail,
+    setPassword,
+    setName,
+    setUsername,
+  } = useSignup();
 
   return (
     <>
@@ -179,7 +147,11 @@ export default function Signup() {
               </div>
             )}
             <div className="flex items-center justify-center mt-4">
-              <Button name="Sign Up " onClick={handleSubmit} />
+              <Button
+                name="Sign Up "
+                onClick={handleSubmit}
+                loading={loading}
+              />
             </div>
             <div className="flex items-center justify-center mt-4 text-sm text-center">
               Already have an account?&ensp;
