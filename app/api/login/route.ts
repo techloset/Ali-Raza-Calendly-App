@@ -92,6 +92,7 @@ export const authOptions: AuthOptions = {
                 email: profile?.email,
                 username: profile?.email,
                 password: "",
+                image: profile?.picture,
               },
             });
             console.log("User created:", newUser);

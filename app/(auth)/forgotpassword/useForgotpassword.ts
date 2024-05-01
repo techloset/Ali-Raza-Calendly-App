@@ -1,3 +1,4 @@
+import { URL } from "@/app/constants/SiteUrl";
 import axios from "axios";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
@@ -17,7 +18,7 @@ export default function useForgotpassword() {
     e.preventDefault();
 
     try {
-      const res = await axios.post("api/register", {
+      const res = await axios.post(`${URL}/api/register`, {
         email,
         password,
       });

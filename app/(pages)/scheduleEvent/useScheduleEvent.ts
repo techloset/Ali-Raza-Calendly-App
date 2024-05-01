@@ -1,6 +1,7 @@
+import { URL } from "@/app/constants/SiteUrl";
 import axios from "axios";
 import { useSearchParams } from "next/navigation";
-import React, { useState } from "react";
+import { useState } from "react";
 import toast from "react-hot-toast";
 
 export default function useScheduleEvent() {
@@ -12,7 +13,7 @@ export default function useScheduleEvent() {
   const selectedTime = searchParams.get("selectedTime");
   const timezone = searchParams.get("timezone");
   const formatDate = searchParams.get("formatDate");
-  console.table({ selectedTime, timezone, formatDate });
+  // console.table({ selectedTime, timezone, formatDate });
 
   const handleSubmit = async () => {
     if (!name || !email || !textArea) {
@@ -30,7 +31,7 @@ export default function useScheduleEvent() {
 
     setIsLoading(true);
     try {
-      const res = await axios.post("/api/scheduleevent", {
+      const res = await axios.post(`${URL}/api/scheduleevent`, {
         name,
         email,
         textArea,

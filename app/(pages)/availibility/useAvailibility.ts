@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { URL } from "@/app/constants/SiteUrl";
 
 export default function useAvailibility() {
   const [startingHour, setStartingHour] = useState<number>();
@@ -62,7 +63,7 @@ export default function useAvailibility() {
     }
     try {
       setLoading(true);
-      const res = await axios.post("http://localhost:3000/api/availibility", {
+      const res = await axios.post(`${URL}/api/availibility`, {
         startingHour,
         endingHour,
         selectedDays,

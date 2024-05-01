@@ -13,7 +13,13 @@ export const POST = async (req: NextRequest) => {
       return NextResponse.json({ message: "Invalid Fields" });
     }
     await prisma.user.create({
-      data: { name, email, username, password: hashpassowrd },
+      data: {
+        name,
+        email,
+        username,
+        password: hashpassowrd,
+        image: "http://localhost:3000/user.png",
+      },
     });
     return NextResponse.json({ message: "User Created Successfully" });
   } catch (error) {

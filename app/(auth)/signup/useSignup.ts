@@ -1,6 +1,7 @@
+import { URL } from "@/app/constants/SiteUrl";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import { useState } from "react";
 import toast from "react-hot-toast";
 
 export default function useSignup() {
@@ -31,7 +32,7 @@ export default function useSignup() {
     }
 
     try {
-      const res = await axios.post("/api/register", {
+      const res = await axios.post(`${URL}/api/register`, {
         name,
         username,
         email,

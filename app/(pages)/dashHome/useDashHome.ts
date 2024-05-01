@@ -1,3 +1,4 @@
+import { URL } from "@/app/constants/SiteUrl";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
@@ -6,7 +7,7 @@ export default function useDashHome() {
 
   const res = async () => {
     try {
-      const res = await axios.get("/api/scheduleevent");
+      const res = await axios.get(`${URL}/api/scheduleevent`);
       setData(res.data);
       //   console.log(data);
     } catch (error) {

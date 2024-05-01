@@ -1,5 +1,5 @@
 import { prisma } from "@/app/libs/prismadb";
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest, NextResponse, userAgent } from "next/server";
 
 export const GET = async (req: NextRequest) => {
   try {
@@ -59,6 +59,7 @@ export const POST = async (request: NextRequest) => {
     const { startingHour, endingHour, selectedDays } = await request.json();
     const data = await prisma.availability.createMany({
       data: {
+        userId: "userId",
         startingHour: parseInt(startingHour), // Convert to number
         endingHour: parseInt(endingHour), // Convert to number
         selectedDays,
