@@ -1,63 +1,32 @@
 "use client";
-import Image from "next/image";
-import React, { useState } from "react";
-import { FaRegClock } from "react-icons/fa";
-import { MdEvent } from "react-icons/md";
-import { GiWorld } from "react-icons/gi";
-import InputField from "@/app/(components)/Input";
-import Button from "@/app/(components)/Button";
-import cornerimage from "@/app/(asset)/images/avilibility_images/Topcornerimage.svg";
-import { useSearchParams } from "next/navigation";
-import axios from "axios";
-import toast from "react-hot-toast";
-import { LoadingSpinner } from "baseui/button/styled-components";
-import Link from "next/link";
+import React from "react";
+import {
+  Link,
+  Image,
+  MdEvent,
+  GiWorld,
+  InputField,
+  LoadingSpinner,
+  FaRegClock,
+  Button,
+  cornerimage,
+} from "@/app/constants/Images";
 
+import useScheduleEvent from "./useScheduleEvent";
 export default function scheduleEvent() {
-  const [name, setName] = useState<string>("");
-  const [email, setEmail] = useState<string>("");
-  const [textArea, setTextArea] = useState<string>("");
-  const [isLoading, setIsLoading] = useState(false);
-  const searchParams = useSearchParams();
-  const selectedTime = searchParams.get("selectedTime");
-  const timezone = searchParams.get("timezone");
-  const formatDate = searchParams.get("formatDate");
-  console.table({ selectedTime, timezone, formatDate });
-
-  const handleSubmit = async () => {
-    if (!name || !email || !textArea) {
-      return toast.error("Please fill all required fields");
-    }
-    if (name.length < 3) {
-      return toast.error("Please enter more than 3 characters in Name");
-    }
-    if (email.length < 3) {
-      return toast.error("Please enter correct Email");
-    }
-    if (textArea.length < 10) {
-      return toast.error("Please enter more than 10 characters in Details");
-    }
-
-    setIsLoading(true);
-    try {
-      const res = await axios.post("/api/scheduleevent", {
-        name,
-        email,
-        textArea,
-        selectedTime,
-        timezone,
-        formatDate,
-      });
-
-      toast.success("Event scheduled successfully");
-      setIsLoading(false);
-    } catch (error) {
-      console.log("error", error);
-      toast.error("Something went wrong in Event scheduling");
-      setIsLoading(false);
-    }
-  };
-
+  const {
+    name,
+    setName,
+    email,
+    setEmail,
+    textArea,
+    setTextArea,
+    isLoading,
+    handleSubmit,
+    selectedTime,
+    timezone,
+    formatDate,
+  } = useScheduleEvent();
   return (
     <>
       <div className="flex justify-center items-center h-screen">

@@ -1,62 +1,19 @@
 "use client";
-
-import React, { useState } from "react";
-import Input from "@/app/(components)/Input";
-import TextareaInput from "@/app/(components)/TextareaInput";
-import DropDown from "@/app/(components)/Dropdown";
-import Image from "next/image";
-import Button from "@/app/(components)/Button";
-import TransparentButton from "@/app/(components)/TransparentButton";
-import { IoMdArrowDropdown } from "react-icons/io";
-import { RiInformationLine } from "react-icons/ri";
-
-export const languages = ["english", "urdu", "punjabi", "roman"];
-interface FormData {
-  fullname: string;
-  message: string;
-  language: string;
-  dateFormate: string;
-  timeFormate: string;
-  country: string;
-  timeZone: string;
-}
-const initialState = {
-  fullname: "",
-  message: "",
-  language: "",
-  dateFormate: "",
-  timeFormate: "",
-  country: "",
-  timeZone: "",
-};
-
+import React from "react";
+import {
+  IoMdArrowDropdown,
+  Input,
+  TextareaInput,
+  DropDown,
+  RiInformationLine,
+  Image,
+  Button,
+  TransparentButton,
+} from "@/app/constants/Images";
+import useProfile from "./useProfile";
 export default function Profile() {
-  const [loading, setisLoading] = useState(false);
-  const [state, setstate] = useState(initialState);
-  const handelChange = (e: any) => {
-    setstate((s) => ({ ...s, [e.target.name]: e.target.value }));
-  };
-
-  const handleSubmit = () => {
-    setisLoading(true);
-    console.log(state);
-    // await axios.post(`${URL}/api/profile`, {
-    //   fullname: value.fullname,
-    // })
-    //   .then(function (response) {
-    //     console.log(response);
-    //     toast.success(`${response.data.message}`)
-    //     reset()
-    //     setisLoading(false)
-
-    //   })
-    //   .catch(function (error) {
-    //     console.log(error);
-    //     toast.error(`${error.response.data.message}`)
-    //   });
-    setisLoading(false);
-  };
-
+  const { state, handelChange, handleSubmit, languages, loading } =
+    useProfile();
   return (
     <>
       <div className="flex  items-center justify-end  mr-8 h-[72px]">
@@ -168,7 +125,11 @@ export default function Profile() {
             />
           </div>
           <div className="w-[70%] sm:w-[440px] mt-10 flex gap-4">
-            <Button onClick={handleSubmit} name="save Chnges" />
+            <Button
+              onClick={handleSubmit}
+              name="save Chnges"
+              loading={loading}
+            />
             <TransparentButton
               onClick={() => {}}
               label="Cancel"

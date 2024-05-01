@@ -1,29 +1,15 @@
 "use client";
-import TransparentButton from "@/app/(components)/TransparentButton";
-import React, { useEffect, useState } from "react";
-import { IoMdArrowDropdown } from "react-icons/io";
-import { CiExport } from "react-icons/ci";
-import { IoFilter } from "react-icons/io5";
-import { FaCaretRight } from "react-icons/fa";
-import axios from "axios";
-
+import React from "react";
+import useDashHome from "./useDashHome";
+import {
+  IoMdArrowDropdown,
+  CiExport,
+  IoFilter,
+  FaCaretRight,
+  TransparentButton,
+} from "@/app/constants/Images";
 export default function DashHome() {
-  const [data, setData] = useState<any>("");
-
-  const res = async () => {
-    try {
-      const res = await axios.get("/api/scheduleevent");
-      setData(res.data);
-      console.log(data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  useEffect(() => {
-    res();
-    console.log("res", res);
-  }, []);
-
+  const { data } = useDashHome();
   return (
     <>
       <div className="flex items-center justify-end  mr-6 h-[72px]">

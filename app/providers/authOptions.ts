@@ -72,6 +72,7 @@ export const authOptions: AuthOptions = {
               data: {
                 name: profile?.name,
                 email: profile?.email,
+                image: profile.picture,
                 username: profile?.email,
                 password: "",
               },

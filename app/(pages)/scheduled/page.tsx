@@ -1,21 +1,17 @@
 "use client";
-import Image from "next/image";
-import React, { useState } from "react";
-import { IoCheckmarkCircleSharp } from "react-icons/io5";
-import { CiShare1 } from "react-icons/ci";
-import { LuUser2 } from "react-icons/lu";
-import { GrSchedule } from "react-icons/gr";
-import { BiWorld } from "react-icons/bi";
-import cornerimage from "@/app/(asset)/images/avilibility_images/Topcornerimage.svg";
-import { useSearchParams } from "next/navigation";
-
+import React from "react";
+import useScheduled from "./useScheduled";
+import {
+  Image,
+  CiShare1,
+  LuUser2,
+  GrSchedule,
+  BiWorld,
+  IoCheckmarkCircleSharp,
+  cornerimage,
+} from "@/app/constants/Images";
 export default function scheduled() {
-  const [name, setName] = useState<string>("");
-  const [email, setEmail] = useState<string>("");
-  const params = useSearchParams();
-  const selectedTime = params.get("selectedTime");
-  const timezone = params.get("timezone");
-  const formatDate = params.get("formatDate");
+  const { selectedTime, timezone, formatDate } = useScheduled();
 
   return (
     <>

@@ -1,14 +1,15 @@
 "use client";
 import React from "react";
-import SignupLogo from "../../(asset)/images/auth_images/logo-calendly.svg";
-import Dontworry from "../../(asset)/images/avilibility_images/Dontworry.svg";
 import Image from "next/image";
-import Bookmarkdesign from "../../(asset)/images/avilibility_images/bookmark_and_plus.png";
-import loadingImg from "../../(asset)/images/avilibility_images/Progressbar.png";
-import Button from "@/app/(components)/Button";
 import useAvailibility from "./useAvailibility";
 import Link from "next/link";
-
+import {
+  SignupLogo,
+  Dontworry,
+  Bookmarkdesign,
+  loadingImg,
+  Button,
+} from "@/app/constants/Images";
 export default function Availibility() {
   const {
     handleStartTimeChange,

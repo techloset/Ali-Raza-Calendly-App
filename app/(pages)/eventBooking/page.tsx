@@ -1,14 +1,15 @@
 "use client";
-import Image from "next/image";
-import React, { useEffect, useState } from "react";
-import Calendar from "react-calendar";
-import { FaRegClock } from "react-icons/fa";
+import React from "react";
 import "react-calendar/dist/Calendar.css";
-import { GrTroubleshoot } from "react-icons/gr";
-import cornerimage from "@/app/(asset)/images/avilibility_images/Topcornerimage.svg";
-import Link from "next/link";
 import useEvnetBooking from "./useEvnetBooking";
-
+import {
+  Calendar,
+  FaRegClock,
+  GrTroubleshoot,
+  cornerimage,
+  Image,
+  Link,
+} from "@/app/constants/Images";
 export default function ScheduleMeeting() {
   const {
     value,

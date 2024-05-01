@@ -1,17 +1,19 @@
 "use client";
 import React from "react";
-import logo from "@/app/(asset)/images/auth_images/logo-calendly.svg";
-import Image from "next/image";
-import { MdKeyboardDoubleArrowLeft } from "react-icons/md";
-import Button from "@/app/(components)/Button";
-import { FaPlus } from "react-icons/fa6";
-import { GrSchedulePlay } from "react-icons/gr";
-import { LuClock3 } from "react-icons/lu";
-import { RiVipCrown2Line } from "react-icons/ri";
-import SidebarBtn from "@/app/(components)/SidebarBtn";
-import { TbBrandGoogleAnalytics } from "react-icons/tb";
-import { TbLogout2 } from "react-icons/tb";
-import { MdSupervisorAccount } from "react-icons/md";
+import {
+  logo,
+  Image,
+  MdKeyboardDoubleArrowLeft,
+  FaPlus,
+  GrSchedulePlay,
+  LuClock3,
+  RiVipCrown2Line,
+  SidebarBtn,
+  TbBrandGoogleAnalytics,
+  TbLogout2,
+  MdSupervisorAccount,
+  Button,
+} from "@/app/constants/Images";
 
 import useDash from "./useDash";
 const Dash = ({ children }: any) => {
