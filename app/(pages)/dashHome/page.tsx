@@ -83,7 +83,7 @@ export default function DashHome() {
                   <div className="">
                     <div className="">{evnt.name}</div>
                     <div className="">
-                      Event type{" "}
+                      Event type
                       <span className="font-bold">{evnt.eventType}</span>
                     </div>
                   </div>

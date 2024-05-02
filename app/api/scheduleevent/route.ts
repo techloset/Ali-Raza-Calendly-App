@@ -17,7 +17,7 @@ export const POST = async (req: NextRequest) => {
     });
     return NextResponse.json({ message: "Event Created Successfully" });
   } catch (error) {
-    return NextResponse.json({ message: "error" });
+    return NextResponse.json({ message: "Error while Creating Event" });
   }
 };
 // export const GET = async (req: NextRequest) => {

@@ -18,6 +18,7 @@ model User {
   emailVerified  DateTime?      @map("verifiedAt")
   sessions       Session[]
   availabilities availability[]
+  // profile        Profile[]
 
   @@map("users")
 }
@@ -41,6 +42,22 @@ model availability {
   user         User     @relation(fields: [userId], references: [id])
 
   @@map("availabilities")
+}
+
+model Profile {
+  id         String @id @default(auto()) @map("_id") @db.ObjectId
+  name       String
+  image      String
+  welcome    String
+  language   String
+  dateFormat String
+  timeFormat String
+  country    String
+  timeZone   String
+  // userId     String @unique @map("_userId") @db.ObjectId
+  // user       User   @relation(fields: [userId], references: [id])
+
+  @@map("profile")
 }
 
 model Session {
